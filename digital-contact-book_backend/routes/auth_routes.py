@@ -25,36 +25,36 @@ def register():
         return jsonify({
             "success": False,
             "message": "All required fields (Name, Email, Password) must be filled."
-        }), 400
+        }), 200
 
     if not is_valid_email(email):
         return jsonify({
             "success": False,
             "message": "Please enter a valid email address."
-        }), 400
+        }), 200
 
     if confirm_password and password != confirm_password:
         return jsonify({
             "success": False,
             "message": "Password and Confirm Password do not match."
-        }), 400
+        }), 200
 
     if len(password) < 6:
         return jsonify({
             "success": False,
             "message": "Password should be at least 6 characters long."
-        }), 400
+        }), 200
 
     user, error = UserModel.create_user(name, email, password)
     if error:
         return jsonify({
             "success": False,
             "message": error
-        }), 400
+        }), 200
 
     return jsonify({
         "success": True,
-        "message": "Registration successful",
+        "message": "Registration successful! Please login.",
         "user": user
     }), 201
 
@@ -72,20 +72,20 @@ def login():
         return jsonify({
             "success": False,
             "message": "Please provide both email and password."
-        }), 400
+        }), 200
 
     user = UserModel.get_user_by_email(email)
     if not user:
         return jsonify({
             "success": False,
             "message": "Invalid email or password."
-        }), 401
+        }), 200
 
     if not UserModel.verify_password(user['password'], password):
         return jsonify({
             "success": False,
             "message": "Invalid email or password."
-        }), 401
+        }), 200
 
     # Return safe user data without password
     safe_user = {
@@ -96,6 +96,6 @@ def login():
 
     return jsonify({
         "success": True,
-        "message": "Login successful",
+        "message": "Login successful!",
         "user": safe_user
     }), 200

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { UserPlus, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { authAPI } from '../services/api';
 
 function Register() {
@@ -52,16 +53,16 @@ function Register() {
 
     try {
       const response = await authAPI.register(formData);
-      if (response.success) {
-        setSuccessMsg('Registration successful! Redirecting to login...');
+      if (response && response.success) {
+        setSuccessMsg(response.message || 'Registration successful! Redirecting to login...');
         setTimeout(() => {
           navigate('/login');
         }, 1500);
       } else {
-        setError(response.message || 'Registration failed. Please try again.');
+        setError(response?.message || 'Registration failed. Please check your details.');
       }
     } catch (err) {
-      const msg = err.response?.data?.message || 'Server connection error. Please verify backend is running.';
+      const msg = err.response?.data?.message || 'Unable to connect to the backend server. Please make sure the Flask backend is running on http://localhost:5000.';
       setError(msg);
     } finally {
       setLoading(false);
@@ -72,13 +73,26 @@ function Register() {
     <div className="auth-page-wrapper">
       <div className="auth-card">
         <div className="auth-header">
-          <div className="auth-logo-badge">?</div>
+          <div className="auth-logo-badge" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+            <UserPlus size={24} color="var(--primary-sage)" strokeWidth={2.2} />
+          </div>
           <h1>Create Account</h1>
           <p>Join Digital Contact Book today</p>
         </div>
 
-        {error && <div className="alert alert-error">?? {error}</div>}
-        {successMsg && <div className="alert alert-success">? {successMsg}</div>}
+        {error && (
+          <div className="alert alert-error" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <AlertCircle size={18} style={{ flexShrink: 0 }} />
+            <span>{error}</span>
+          </div>
+        )}
+
+        {successMsg && (
+          <div className="alert alert-success" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <CheckCircle2 size={18} style={{ flexShrink: 0 }} />
+            <span>{successMsg}</span>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -88,7 +102,7 @@ function Register() {
               id="name"
               name="name"
               className="form-control"
-              placeholder="John Doe"
+              placeholder="Darshni T"
               value={formData.name}
               onChange={handleChange}
               required
@@ -102,7 +116,7 @@ function Register() {
               id="email"
               name="email"
               className="form-control"
-              placeholder="you@example.com"
+              placeholder="darshniraj47@gmail.com"
               value={formData.email}
               onChange={handleChange}
               required

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { LogIn, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { authAPI } from '../services/api';
 
 function Login() {
@@ -31,14 +32,14 @@ function Login() {
 
     try {
       const response = await authAPI.login(formData);
-      if (response.success && response.user) {
+      if (response && response.success && response.user) {
         localStorage.setItem('contact_user', JSON.stringify(response.user));
         navigate('/dashboard');
       } else {
-        setError(response.message || 'Login failed. Please check your credentials.');
+        setError(response?.message || 'Invalid email or password.');
       }
     } catch (err) {
-      const msg = err.response?.data?.message || 'Unable to connect to the server. Please check if Flask backend is running.';
+      const msg = err.response?.data?.message || 'Unable to connect to the backend server. Please make sure the Flask backend is running on http://localhost:5000.';
       setError(msg);
     } finally {
       setLoading(false);
@@ -49,12 +50,19 @@ function Login() {
     <div className="auth-page-wrapper">
       <div className="auth-card">
         <div className="auth-header">
-          <div className="auth-logo-badge">??</div>
+          <div className="auth-logo-badge" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+            <LogIn size={24} color="var(--primary-sage)" strokeWidth={2.2} />
+          </div>
           <h1>Welcome Back</h1>
           <p>Sign in to your Digital Contact Book</p>
         </div>
 
-        {error && <div className="alert alert-error">?? {error}</div>}
+        {error && (
+          <div className="alert alert-error" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <AlertCircle size={18} style={{ flexShrink: 0 }} />
+            <span>{error}</span>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -64,7 +72,7 @@ function Login() {
               id="email"
               name="email"
               className="form-control"
-              placeholder="you@example.com"
+              placeholder="darshniraj47@gmail.com"
               value={formData.email}
               onChange={handleChange}
               required
