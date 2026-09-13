@@ -42,7 +42,7 @@ jobs:
       - name: Build frontend
         working-directory: ./digital-contact-book_frontend
         env:
-          VITE_API_URL: ${{ vars.VITE_API_URL || secrets.VITE_API_URL || '' }}
+          VITE_API_URL: ${{ vars.VITE_API_URL || secrets.VITE_API_URL || 'https://digicontactbook.onrender.com' }}
         run: npm run build
 
       - name: Setup Pages
