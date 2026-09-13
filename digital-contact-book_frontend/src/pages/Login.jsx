@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { LogIn, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { LogIn, AlertCircle } from 'lucide-react';
 import { authAPI } from '../services/api';
 
 function Login() {
@@ -39,7 +39,7 @@ function Login() {
         setError(response?.message || 'Invalid email or password.');
       }
     } catch (err) {
-      const msg = err.response?.data?.message || 'Unable to connect to the backend server. Please make sure the Flask backend is running on http://localhost:5000.';
+      const msg = err.response?.data?.message || 'Unable to connect to the backend server. Please check your network connection and verify the backend is running.';
       setError(msg);
     } finally {
       setLoading(false);
@@ -72,7 +72,7 @@ function Login() {
               id="email"
               name="email"
               className="form-control"
-              placeholder="darshniraj47@gmail.com"
+              placeholder="you@example.com"
               value={formData.email}
               onChange={handleChange}
               required

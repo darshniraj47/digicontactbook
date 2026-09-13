@@ -62,7 +62,7 @@ function Register() {
         setError(response?.message || 'Registration failed. Please check your details.');
       }
     } catch (err) {
-      const msg = err.response?.data?.message || 'Unable to connect to the backend server. Please make sure the Flask backend is running on http://localhost:5000.';
+      const msg = err.response?.data?.message || 'Unable to connect to the backend server. Please check your network connection and verify the backend is running.';
       setError(msg);
     } finally {
       setLoading(false);
@@ -116,7 +116,7 @@ function Register() {
               id="email"
               name="email"
               className="form-control"
-              placeholder="darshniraj47@gmail.com"
+              placeholder="you@example.com"
               value={formData.email}
               onChange={handleChange}
               required

@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path: './digital-contact-book_frontend/package-lock.json'
+          cache-dependency-path: './digital-contact-book_frontend/package.json'
 
       - name: Install dependencies
         working-directory: ./digital-contact-book_frontend
@@ -41,6 +41,8 @@ jobs:
 
       - name: Build frontend
         working-directory: ./digital-contact-book_frontend
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL || secrets.VITE_API_URL || '' }}
         run: npm run build
 
       - name: Setup Pages

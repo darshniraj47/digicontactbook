@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 from database import test_db_connection
@@ -9,7 +10,14 @@ from routes.profile_routes import profile_bp
 app = Flask(__name__)
 
 # Configure Cross-Origin Resource Sharing (CORS)
-CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
+# Supports GitHub Pages frontend, local development, and production origins
+CORS(
+    app,
+    resources={r"/api/*": {"origins": "*"}},
+    supports_credentials=True,
+    allow_headers=["Content-Type", "X-User-Id", "Authorization"],
+    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+)
 
 # Register Blueprints for modular route management
 app.register_blueprint(auth_bp, url_prefix='/api')
@@ -21,7 +29,8 @@ def index():
     return jsonify({
         "success": True,
         "message": "Welcome to Digital Contact Book Backend API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "status": "online"
     }), 200
 
 # Error Handlers
@@ -40,10 +49,14 @@ def internal_server_error(error):
     }), 500
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    host = os.environ.get('HOST', '0.0.0.0')
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+
     print("==================================================")
     print(" DIGITAL CONTACT BOOK - FLASK BACKEND SERVER")
     print("==================================================")
     test_db_connection()
-    print(" Backend running at: http://localhost:5000")
+    print(f" Backend listening on: {host}:{port}")
     print("==================================================")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host=host, port=port, debug=debug_mode)

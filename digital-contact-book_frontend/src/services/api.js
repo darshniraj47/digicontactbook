@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-// Base API URL pointing to the Flask backend
-const API_BASE_URL = 'http://localhost:5000/api';
+// Read API URL from environment variable or fallback to localhost
+const rawApiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = rawApiUrl.endsWith('/api') ? rawApiUrl : `${rawApiUrl.replace(/\/$/, '')}/api`;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
