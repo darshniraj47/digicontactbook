@@ -73,7 +73,7 @@ function ContactForm({ initialData = null, onSubmit, isEditing = false, isLoadin
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && <div className="alert alert-error">?? {error}</div>}
+      {error && <div className="alert alert-error">{error}</div>}
 
       <div className="form-group">
         <label htmlFor="name">Full Name *</label>

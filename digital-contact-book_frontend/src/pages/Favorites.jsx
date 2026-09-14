@@ -86,7 +86,7 @@ function Favorites() {
             </button>
           </div>
 
-          {error && <div className="alert alert-error">?? {error}</div>}
+          {error && <div className="alert alert-error">{error}</div>}
 
           {loading ? (
             <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--secondary-text)' }}>

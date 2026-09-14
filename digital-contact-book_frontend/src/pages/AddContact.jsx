@@ -50,8 +50,8 @@ function AddContact() {
               <p>Fill in the contact information below</p>
             </div>
 
-            {error && <div className="alert alert-error">?? {error}</div>}
-            {successMsg && <div className="alert alert-success">? {successMsg}</div>}
+            {error && <div className="alert alert-error">{error}</div>}
+            {successMsg && <div className="alert alert-success">{successMsg}</div>}
 
             <ContactForm
               onSubmit={handleAddContact}

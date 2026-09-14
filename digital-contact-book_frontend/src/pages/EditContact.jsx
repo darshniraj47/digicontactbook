@@ -65,12 +65,12 @@ function EditContact() {
         <main className="page-container">
           <div className="form-page-card">
             <div className="form-page-header">
-              <h2>? Edit Contact</h2>
+              <h2>Edit Contact</h2>
               <p>Update contact information</p>
             </div>
 
-            {error && <div className="alert alert-error">?? {error}</div>}
-            {successMsg && <div className="alert alert-success">? {successMsg}</div>}
+            {error && <div className="alert alert-error">{error}</div>}
+            {successMsg && <div className="alert alert-success">{successMsg}</div>}
 
             {loading ? (
               <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--secondary-text)' }}>

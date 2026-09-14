@@ -253,7 +253,7 @@ function Settings() {
 
             {profileMsg.text && (
               <div className={`alert ${profileMsg.type === 'success' ? 'alert-success' : 'alert-error'}`}>
-                {profileMsg.type === 'success' ? <Check size={16} /> : '??'} {profileMsg.text}
+                {profileMsg.type === 'success' ? <Check size={16} /> : <AlertTriangle size={16} />} {profileMsg.text}
               </div>
             )}
 
@@ -302,7 +302,7 @@ function Settings() {
 
             {passwordMsg.text && (
               <div className={`alert ${passwordMsg.type === 'success' ? 'alert-success' : 'alert-error'}`}>
-                {passwordMsg.type === 'success' ? <Check size={16} /> : '??'} {passwordMsg.text}
+                {passwordMsg.type === 'success' ? <Check size={16} /> : <AlertTriangle size={16} />} {passwordMsg.text}
               </div>
             )}
 
@@ -313,7 +313,7 @@ function Settings() {
                   type="password"
                   id="curr_pass"
                   className="form-control"
-                  placeholder="••••••••"
+                  placeholder="Enter current password"
                   value={passwordData.current_password}
                   onChange={(e) => setPasswordData({ ...passwordData, current_password: e.target.value })}
                   required
@@ -326,7 +326,7 @@ function Settings() {
                   type="password"
                   id="new_pass"
                   className="form-control"
-                  placeholder="•••••••• (Min 6 characters)"
+                  placeholder="Enter new password (min 6 characters)"
                   value={passwordData.new_password}
                   onChange={(e) => setPasswordData({ ...passwordData, new_password: e.target.value })}
                   required
@@ -339,7 +339,7 @@ function Settings() {
                   type="password"
                   id="conf_new_pass"
                   className="form-control"
-                  placeholder="••••••••"
+                  placeholder="Confirm new password"
                   value={passwordData.confirm_new_password}
                   onChange={(e) => setPasswordData({ ...passwordData, confirm_new_password: e.target.value })}
                   required
@@ -366,7 +366,7 @@ function Settings() {
 
             {prefMsg.text && (
               <div className={`alert ${prefMsg.type === 'success' ? 'alert-success' : 'alert-error'}`}>
-                {prefMsg.type === 'success' ? <Check size={16} /> : '??'} {prefMsg.text}
+                {prefMsg.type === 'success' ? <Check size={16} /> : <AlertTriangle size={16} />} {prefMsg.text}
               </div>
             )}
 

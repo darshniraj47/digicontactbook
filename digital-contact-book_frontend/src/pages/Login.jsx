@@ -86,7 +86,7 @@ function Login() {
               id="password"
               name="password"
               className="form-control"
-              placeholder="••••••••"
+              placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}
               required

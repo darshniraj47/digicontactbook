@@ -130,7 +130,7 @@ function Register() {
               id="password"
               name="password"
               className="form-control"
-              placeholder="••••••••"
+              placeholder="Enter password (min 6 characters)"
               value={formData.password}
               onChange={handleChange}
               required
@@ -144,7 +144,7 @@ function Register() {
               id="confirm_password"
               name="confirm_password"
               className="form-control"
-              placeholder="••••••••"
+              placeholder="Confirm your password"
               value={formData.confirm_password}
               onChange={handleChange}
               required

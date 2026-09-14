@@ -86,7 +86,7 @@ function Dashboard() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
               <h1 style={{ fontSize: '1.75rem', color: 'var(--dark-sage)', fontWeight: 700 }}>
-                Hello, {user ? user.name : 'User'} ??
+                Hello, {user ? user.name : 'User'}
               </h1>
               <p style={{ color: 'var(--secondary-text)', fontSize: '0.95rem' }}>
                 Manage and organize your personal and professional contacts
@@ -133,7 +133,7 @@ function Dashboard() {
             onCategoryChange={setSelectedCategory}
           />
 
-          {error && <div className="alert alert-error">?? {error}</div>}
+          {error && <div className="alert alert-error">{error}</div>}
 
           {/* Contacts List Grid */}
           {loading ? (
